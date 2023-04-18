@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RealState.Core.Domain.Common;
 using RealState.Core.Domain.Entities;
 
-namespace RealState.Infrastucture.Persistence.Contexts
+namespace RealState.Infrastructure.Persistence.Contexts
 {
     public class ApplicationContext : DbContext
     {
@@ -67,20 +67,20 @@ namespace RealState.Infrastucture.Persistence.Contexts
             #region "Relations"
 
             modelBuilder.Entity<Ads>()
-                .HasMany<FavouriteProperties>(f => f.FavouriteProperties)
+                .HasMany(f => f.FavouriteProperties)
                 .WithOne(f => f.Ads)
                 .HasForeignKey(f => f.PropetyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<AdsType>()
-              .HasMany<Ads>(a => a.Ads)
+              .HasMany(a => a.Ads)
               .WithOne(a => a.AdsType)
               .HasForeignKey(a => a.AdsTypeId)
               .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Sales>()
-             .HasMany<Ads>(a => a.Ads)
+             .HasMany(a => a.Ads)
              .WithOne(a => a.Sales)
              .HasForeignKey(a => a.SalesId)
              .OnDelete(DeleteBehavior.Cascade);

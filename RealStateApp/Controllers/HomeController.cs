@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RealStateApp.Models;
+using RealState.Models;
 using System.Diagnostics;
 
-namespace RealStateApp.Controllers
+namespace RealState.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,10 +1,10 @@
 ﻿
 
 using RealState.Core.Application.Interfaces.Repositories;
-using RealState.Infrastucture.Persistence.Contexts;
 using RealState.Core.Domain.Entities;
+using RealState.Infrastructure.Persistence.Contexts;
 
-namespace RealState.Infrastucture.Persistence.Repositories
+namespace RealState.Infrastructure.Persistence.Repositories
 {
     public class AdsRepository : GenericRepository<Ads>, IAdsRepository
     {

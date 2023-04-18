@@ -5,7 +5,7 @@ using RealState.Core.Application;
 using RealState.Infrastructure.Identity;
 using RealState.Infrastructure.Identity.Entities;
 using RealState.Infrastructure.Shared;
-using RealState.Infrastucture.Persistence;
+using RealState.Infrastructure.Persistence;
 
 
 var builder = WebApplication.CreateBuilder(args);

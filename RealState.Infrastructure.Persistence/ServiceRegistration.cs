@@ -1,13 +1,13 @@
 ﻿
 using RealState.Core.Application.Interfaces.Repositories;
-using RealState.Infrastucture.Persistence.Contexts;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RealState.Infrastucture.Persistence.Repositories;
+using RealState.Infrastructure.Persistence.Repositories;
+using RealState.Infrastructure.Persistence.Contexts;
 
-namespace RealEstateApp.Infrastucture.Persistence
+namespace RealState.Infrastructure.Persistence
 {
     public static class ServiceRegistration
     {
@@ -23,14 +23,14 @@ namespace RealEstateApp.Infrastucture.Persistence
             {
                 services.AddDbContext<ApplicationContext>(options => options
                 .UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                m=> m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
+                m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
             }
 
             #endregion
 
             #region "Services"
 
-            services.AddTransient(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IAdsRepository, AdsRepository>();
             services.AddTransient<IFavouritePretsRepository, FavouritePretsRepository>();
             services.AddTransient<IAdsTypeRepository, AdsTypeRepository>();

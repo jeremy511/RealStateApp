@@ -1,9 +1,8 @@
-﻿
-using RealState.Infrastucture.Persistence.Contexts;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RealState.Core.Application.Interfaces.Repositories;
+using RealState.Infrastructure.Persistence.Contexts;
 
-namespace RealState.Infrastucture.Persistence.Repositories
+namespace RealState.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<Entity> : IGenericRepository<Entity> where Entity : class
     {
