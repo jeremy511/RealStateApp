@@ -15,12 +15,12 @@ namespace RealState.WebAPI.Extentions
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Restaurante API",
+                    Title = "RealState API",
                     Description = "This Api will be responsible for overall data distribution",
                     Contact = new OpenApiContact
                     {
-                        Name = "Victor Enmanuel Tejada Zabala",
-                        Email = "20209227@itla.edu.do",
+                        Name = "Jeremy Reinoso | Geanluis Lorenzo",
+                        Email = "20210751@itla.edu.do | 20210325@itla.edu.do",
                         Url = new Uri("https://www.itla.edu.do")
                     }
                 });
