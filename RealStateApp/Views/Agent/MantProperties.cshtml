@@ -1,0 +1,82 @@
+﻿@using RealState.Core.Application.ViewModels.Properties
+
+@model List<PropertyViewModel>
+@{
+    ViewData["Title"] = "Mantenimiento de Propiedades";
+}
+
+
+<div class="container-fluid">
+     <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-action="Add" asp-controller="Agent" class="btn btn-outline-success">Añadir Propiedad</a>
+        </div>
+    </div>
+    <div class="col-11">
+            <div class="row">
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+ 
+            @if (Model.Count != 0)
+            {
+
+
+                @foreach(PropertyViewModel list in Model)
+                {
+                
+                   <div class="col-5">
+
+                          
+                      
+                          <div class="card shadow-sm">
+                            <div class="offset-8">
+                               <a asp-action="Edit" asp-controller="Agent" asp-route-Id="@list.Id"> <img src="~/Images/Icon/Edit.png" width="25" height="25" /></a>     <button type="button"  data-toggle="modal" data-target="#exampleModalCenter"> <img src="~/Images/Icon/Delete.png" width="25" height="25" /> </button>
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLongTitle">Confirmacion</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <h4>Estas seguro que desea eliminar la propiedad?</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                      <a asp-action="Delete" asp-controller="Agent" asp-route-Id="@list.Id" class="btn btn-primary">Si</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <a style="text-decoration: none;" asp-controller="Home" asp-action="AdDetails" class="text-dark" asp-route-Id="@list.Id" >
+                            <img class="bd-placeholder-img card-image-top" id="cardImg"  src="@list.Photos" />
+                            <div class="card-body">
+                               <h3 class="card-text fw-bold">@list.Type</h3>
+                               <h6 class="card-text">Codigo</h6>
+                               <p class="fw-bold">@list.Identifier</p>
+                               <h6 class="card-text">@list.SaleType</h6>
+                               <p class="text-danger">$@list.Price</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <small class="fw-bold"><img src="~/Images/Icon/bed.jpg" id="CardFooterIcon" height="50" width="50" />  @list.BedRooms  <img src="~/Images/Icon/shower.jpg"  id="CardFooterIcon"  height="50" width="50" />  @list.BathRooms  <img src="~/Images/Icon/size.png"   height="40" width="40" id="CardFooterIcon" /> @list.Size mt </small>
+                            </div>
+                          </a>
+                          </div>
+                   </div>
+                }
+            }
+            else
+            {
+                <h3>No tienes propiedades registradas</h3>
+            }
+
+            </div>
+        </div>
+    </div>
+</div>
+

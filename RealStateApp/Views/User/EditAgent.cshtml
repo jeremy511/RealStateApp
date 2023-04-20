@@ -1,0 +1,48 @@
+﻿@using RealState.Core.Application.ViewModels.Agents;
+@using RealState.Core.Application.ViewModels.Users;
+
+@model SaveAgentViewModel
+@{
+    ViewData["Title"] = "Editando Perfil";
+}
+
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-text text-center text-dark">Registrarse!</h3>
+            </div>
+            
+
+                <form method="post" asp-action="EditAgent" asp-controller="User">
+                    <div class="mb-5">
+                        <label asp-for="FirstName" class="form-label">Nombre:</label>
+                        <input class="form-control" asp-for="FirstName" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="LastName" class="form-label">Apellido:</label>
+                        <input class="form-control" asp-for="LastName" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="ProfilePic" class="form-label">Foto de perfil:</label>
+                        <input class="form-control" type="file" asp-for="ProfilePic" />
+                        <span asp-validation-for="ProfilePic" class="text-danger"></span>
+
+                    </div>
+                     <div class="mb-5">
+                        <label asp-for="Phone" class="form-label">Telefono:</label>
+                        <input class="form-control" asp-for="Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+
+                    </div>
+                    <button class="btn btn-success" type="submit">Guardar</button>
+                    <a asp-action="Index" asp-controller="Agent" class="btn btn-warning" >Volver atras</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

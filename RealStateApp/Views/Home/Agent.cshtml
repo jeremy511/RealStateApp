@@ -1,0 +1,55 @@
+﻿@using RealState.Core.Application.ViewModels.Agents
+@model List<AgentViewModel>
+@{
+    ViewData["Title"] = "Agentes";
+}
+
+
+<div class="container-fluid">
+
+    <div class="row mb-3">
+        <div>
+            <form method="post" asp-action="Agent" asp-controller="Home" >         
+                <div class="row">
+                    <div class="col-4 offset-6">
+                        <input type="text" name="name" id="name" class="form-control" />
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            if( ViewBag.Filter )
+            {
+                <h3>No hay agentes registrado en el sistema con ese nombre</h3>
+            }
+            else
+            {
+                 <h3>No hay agentes registrado en el sistema.</h3>
+            }
+
+        }
+        else
+        {
+            foreach (AgentViewModel agent in Model)
+            {
+                <div class="col-4">
+                    <a style="text-decoration: none;" asp-action="AgentAds" asp-route-Id="@agent.Id" asp-controller="Home">
+                       <div class="card">
+                            <div class="card-body">
+                                
+                                <img class="offset-4" src="@agent.Photo" width="120" height="120" style=" border-radius: 50%;" />
+                                <h4 class="card-text text-center">@agent.FirstName @agent.LastName</h4>
+                            </div>
+                        </div>
+                    </a>
+        </div>
+            }
+        }
+    </div>
+</div>

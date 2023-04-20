@@ -1,0 +1,57 @@
+﻿@using RealState.Core.Application.ViewModels.Users
+@model IndexAdminViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Propiedades</h3>
+                </div>
+                <div class="card-body">
+                    <p>Cantidad: @Model.properties</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Agentes</h3>
+                </div>
+                <div class="card-body">
+                    <p>Activos: @Model.agentActive</p>
+                    <p>Inactivos: @Model.agentUnactive</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Clientes</h3>
+                </div>
+                <div class="card-body">
+                    <p>Activos: @Model.clientActive</p>
+                    <p>Inactivos: @Model.clientUnactive</p>
+                </div>
+            </div>
+        </div>
+         <div class="col-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Desarrolladores</h3>
+                </div>
+                <div class="card-body">
+                    <p>Activos: @Model.developerActive</p>
+                    <p>Inactivos: @Model.developerUnactive</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
