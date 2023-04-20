@@ -9,7 +9,7 @@ using RealState.Core.Application.Dtos.Email;
 
 namespace RealState.Infrastructure.Shared.Services
 {
-    public class EmailService : IEmailServices
+    public class EmailService : IEmailService
     {
         public MailSettings MailSettings { get; }
 

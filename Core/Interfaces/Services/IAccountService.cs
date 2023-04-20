@@ -4,7 +4,7 @@ using RealState.Core.Application.Dtos.Account;
 using RealState.Core.Application.ViewModels.Agents;
 using RealState.Core.Application.ViewModels.Users;
 
-namespace RealEstateApp.Core.Application.Interfaces.Services
+namespace RealState.Core.Application.Interfaces.Services
 {
     public interface IAccountService
     {

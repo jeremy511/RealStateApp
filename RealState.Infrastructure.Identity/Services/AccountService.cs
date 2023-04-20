@@ -12,12 +12,11 @@ using RealState.Infrastructure.Identity.Entities;
 using RealState.Core.Application.Dtos.Email;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-
 using System.Text;
 using System.Security.Cryptography;
-using RealEstateApp.Core.Application.Interfaces.Services;
 
-namespace RealEstateApp.Infrastructure.Identity.Services
+
+namespace RealState.Infrastructure.Identity.Services
 {
     public class AccountService : IAccountService
     {
