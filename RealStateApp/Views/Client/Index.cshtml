@@ -1,0 +1,121 @@
+﻿@using RealState.Core.Application.ViewModels.Properties
+
+@model List<PropertyViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+    List<MantPropertyViewModel> mantProperties = ViewBag.PropertyList;
+   
+}
+
+
+<div class="row mb-3">
+       <div>
+            <form method="post" asp-action="Index" asp-controller="Home" >         
+                <div class="row">
+                   <div class="col-4 offset-6">
+                        <input type="text" name="identifier" id="identifier" class="form-control" />
+                   </div>
+                   <div class="col-1">
+                       <button type="submit" class="btn btn-primary">Buscar</button>
+                  </div>
+                 </div>
+            </form>
+       </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h3 class="text-center">Filtros</h3>
+            </div>
+            <div class="card-body">
+               <div>
+                    <h4>Filtros</h4>
+                    <form method="post" asp-action="Index" asp-controller="Home">
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="Type-All" value="null" name="TypeId" />
+                                <label class="form-check-label" for="Type-All" >Todas</label>
+                            </div>
+                        </div>
+
+                        @if(mantProperties.Count != 0)
+                        {
+                            foreach(MantPropertyViewModel mant in mantProperties)
+                            {
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="type-@mant.Id" value="@mant.Id" name="TypeId" />
+                                        <label class="form-check-label" for="type-@mant.Id">@mant.Name</label>
+                                    </div>
+                                 </div>
+                            }
+                        }
+
+                        <div class="mb-3">
+                            <label>Precio mínimo y máximo</label>
+                            <input type="number" step="any" class="form-control" id="min" placeholder="Cantidad Minima" name="min" />
+                            <input type="number" step="any" class="form-control" id="max" placeholder="Cantidad Maxima" name="max" /> 
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label>Cantidad de habitaciones y baños</label>
+                            <input type="number" step="any" class="form-control" id="bed" placeholder="Habitaciones" name="bed" />
+                            <input type="number" step="any" class="form-control" id="bath" placeholder="Baños" name="bath" /> 
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary align-content-center">Filtrar</button>
+                    </form>
+               </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="row">
+            @if(Model.Count != 0)
+            {
+                foreach(PropertyViewModel list in Model)
+                {
+                   
+                       <div class="col-5">
+                              <div class="card shadow-sm">
+                                    <div class="offset-10">
+                                
+                                            <a asp-action="AddFavourite" asp-controller="Client" asp-route-Id="@list.Id"> <img src="~/Images/Icon/colorStar.png" width="25" height="25" /></a>
+                            
+                                        
+                                    </div>
+                               <a style="text-decoration: none;" asp-controller="Home" asp-action="AdDetails" class="text-dark" asp-route-Id="@list.Id" >
+                                <img class="bd-placeholder-img card-image-top" id="cardImg" src="@list.Photos" />
+                                <div class="card-body">
+                                   <h3 class="card-text fw-bold">@list.Type</h3>
+                                   <h6 class="card-text">Codigo</h6>
+                                   <p class="fw-bold">@list.Identifier</p>
+                                   <h6 class="card-text">@list.SaleType</h6>
+                                   <p class="text-danger">$@list.Price</p>
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <small class="fw-bold"><img src="~/Images/Icon/bed.jpg" id="CardFooterIcon" height="50" width="50" />  @list.BedRooms  <img src="~/Images/Icon/shower.jpg"  id="CardFooterIcon"  height="50" width="50" />  @list.BathRooms  <img src="~/Images/Icon/size.png"   height="40" width="40" id="CardFooterIcon" /> @list.Size mt </small>
+                                </div>
+                                </a>
+                              </div>
+                             
+                       </div>
+                    
+                }
+            }
+            else
+            {
+                <h3>No hay propiedades registradas en el sistema.</h3>
+            }
+        </div>
+    </div>
+</div>
+
+

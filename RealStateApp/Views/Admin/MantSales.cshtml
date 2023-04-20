@@ -1,0 +1,73 @@
+﻿@using RealState.Core.Application.ViewModels.Properties
+
+@model List<MantSalesViewModel>
+@{
+    ViewData["Title"] = "Mantenimiento de Ventas";
+    
+}
+
+<div class="container-fluid">
+    <div class="row m-5">
+        <div class="col-3 offset-10">
+            <a asp-controller="Admin" asp-action="CreateSale" class="btn btn-outline-success">Crear nuevo tipo</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+             @if (ViewBag.HaveMessage) {
+                if(@ViewBag.Message == "Datos Actualizados Correctamente!")
+                {
+                    <div class="alert alert-success alert-dismissible fade show role" role="alert">
+                            <p>@ViewBag.Message</p>
+                            <button type="button" class="btn-close" data-bs-dismiss= "alert" aria-label="Close"></button>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger alert-dismissible fade show role" role="alert">
+                            <p>@ViewBag.Message</p>
+                            <button type="button" class="btn-close" data-bs-dismiss= "alert" aria-label="Close"></button>
+                        </div>
+                }
+            }
+            <div class="card">
+
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+ 
+                <div class="card-header">
+                    <h3 class="text-center">Listado Tipo Ventas</h3>
+                </div>
+                <div class="card-body">
+                     <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Descripcion</th>
+                                <th>Cantidad de propiedades</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(MantSalesViewModel list in Model)
+                            {
+                                  <tr>
+                                    <td>@list.Name</td>
+                                    <td>@list.Description</td>
+                                    <td>@list.Cantidad</td>
+                                              
+                              
+
+                                    <td><a class="btn btn-outline-success" asp-action="EditSales" asp-controller="Admin" asp-route-id="@list.Id">Editar</a>   <a class="btn btn-outline-danger" asp-action="DeleteSal" asp-controller="Admin" asp-route-Id="@list.Id">Eliminar</a> </td>
+                                     
+                                 </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

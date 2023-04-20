@@ -1,0 +1,36 @@
+﻿@using RealState.Core.Application.ViewModels.Properties
+
+
+@model SaveSalesViewModel
+@{
+    ViewData["Title"] = "Crear Mejora";
+}
+
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-text text-center text-dark">Agregando nueva mejora</h3>
+            </div>
+            <div class="card-body">
+
+                <form method="post" asp-action="CreateUpgrates" asp-controller="Admin">
+                    <div class="mb-5">
+                        <label asp-for="Name" class="form-label">Nombre:</label>
+                        <input class="form-control" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="Description" class="form-label">Descripcion:</label>
+                        <input class="form-control" asp-for="Description" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+
+                    </div>
+                   
+                    <button class="btn btn-success" type="submit">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

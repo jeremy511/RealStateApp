@@ -6,7 +6,13 @@ using RealState.Core.Application.Interfaces.Services;
 using RealState.Infrastructure.Identity.Entities;
 using RealState.Infrastructure.Identity.Contexts;
 using RealState.Infrastructure.Identity.Services;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using RealState.Core.Domain.Settings;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Newtonsoft.Json;
+using RealState.Core.Application.Dtos.Account;
+using Microsoft.AspNetCore.Http;
 
 namespace RealState.Infrastructure.Identity
 {
@@ -35,20 +41,56 @@ namespace RealState.Infrastructure.Identity
                 services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
 
+                services.ConfigureApplicationCookie(options => {
 
+                    options.LoginPath = "/User";
+                    options.AccessDeniedPath = "/User/AccessDenied";
+                    });
 
-                services.AddAuthentication();
-                //services.ConfigureApplicationCookie(options => {
+            services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
 
-                //    options.LoginPath = "/User";
-                //    options.AccessDeniedPath = "/User/AccessDenied";
-                //    });
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = false;
 
-                #endregion
+                options.Events = new JwtBearerEvents()
+                {
+                    OnAuthenticationFailed = c =>
+                    {
+                        c.NoResult();
+                        c.Response.StatusCode = 500;
+                        c.Response.ContentType = "text/plain";
+                        return c.Response.WriteAsync(c.Exception.ToString());
+                    },
+                    OnChallenge = c =>
+                    {
+                        c.HandleResponse();
+                        c.Response.StatusCode = 401;
+                        c.Response.ContentType = "application/json";
+                        var result = JsonConvert.SerializeObject(new JwtResponse { HasError = true, Error = "You are not Authorized" });
+                        return c.Response.WriteAsync(result);
+                    },
+                    OnForbidden = c =>
+                    {
+                        c.Response.StatusCode = 403;
+                        c.Response.ContentType = "application/json";
+                        var result = JsonConvert.SerializeObject(new JwtResponse { HasError = true, Error = "You are not Authorized to access this resource" });
+                        return c.Response.WriteAsync(result);
+                    }
+                };
 
-                #region Services
+            }); 
 
-                services.AddTransient<IAccountService, AccountService>();
+            #endregion
+
+            #region Services
+
+            services.AddTransient<IAccountService, AccountService>();
 
                 #endregion
 

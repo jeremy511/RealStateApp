@@ -1,0 +1,72 @@
+﻿@using RealState.Core.Application.ViewModels.Users
+
+@model SaveAdminViewModel
+@{
+    ViewData["Title"] = "Registrarse";
+}
+
+
+<div class="container-fluid">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-text text-center text-dark">Agregando nuevo usuario</h3>
+            </div>
+            <div class="card-body">
+                    @if  (ViewBag.HasError)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p>@Model.Error</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                
+
+                <form method="post" asp-action="RegisterAdmin" asp-controller="Admin"  enctype="multipart/form-data">
+                    <div class="mb-5">
+                        <label asp-for="FirstName" class="form-label">Nombre:</label>
+                        <input class="form-control" asp-for="FirstName" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="LastName" class="form-label">Apellido:</label>
+                        <input class="form-control" asp-for="LastName" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="Email" class="form-label">Email:</label>
+                        <input class="form-control" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+                     <div class="mb-5">
+                        <label asp-for="IdCard" class="form-label">Cedula:</label>
+                        <input class="form-control" asp-for="IdCard" />
+                        <span asp-validation-for="IdCard" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="UserName" class="form-label">Nombre de Usuario:</label>
+                        <input class="form-control" asp-for="UserName" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input class="form-control" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    </div>
+                    <div class="mb-5">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                        <input class="form-control" asp-for="ConfirmPassword" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                    </div>
+                    <button class="btn btn-success" type="submit">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

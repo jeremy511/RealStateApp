@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace RealState.Core.Application.ViewModels.Users
@@ -6,6 +7,8 @@ namespace RealState.Core.Application.ViewModels.Users
     public class SaveUserViewModel
     {
         public string ? Id { get; set; }
+
+        public string? Photo { get; set; }
 
         [Required(ErrorMessage = "*Obligado*")]
         [DataType(DataType.Text)]
@@ -41,7 +44,7 @@ namespace RealState.Core.Application.ViewModels.Users
         [RegularExpression(@"^\+[1-1]\([8-8]\d{1}[9-9]\)-\d{3}\-\d{4}$", ErrorMessage = "Telefono no valido Ejemplo de telefono +1(8x9)-xxx-xxxx")]
         [Required(ErrorMessage = "*Obligado*")]
         [DataType(DataType.PhoneNumber)]
-        public string Tel { get; set; }
+        public string Phone { get; set; }
 
         
         public string UserType { get; set; }
@@ -50,5 +53,7 @@ namespace RealState.Core.Application.ViewModels.Users
         public double? StartingAmount { get; set; }
         public bool  HasError { get; set; }
         public string? Error { get; set; }
+
+        public IFormFile? File { get; set; }
     }
 }

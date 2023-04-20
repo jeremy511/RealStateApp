@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealStateApp", "RealStateApp\RealStateApp.csproj", "{33AEDAB5-2636-48C1-B228-065EC588198E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState", "RealStateApp\RealState.csproj", "{33AEDAB5-2636-48C1-B228-065EC588198E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4B7F6FD6-2249-45E3-9397-29C3ED225137}"
 EndProject
@@ -23,11 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Infrastructure.Pe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Infrastructure.Shared", "RealState.Infrastructure.Shared\RealState.Infrastructure.Shared.csproj", "{7C724A16-79D6-4AE0-99C0-86FF641200F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.WebAPI", "RealState.WebAPI\RealState.WebAPI.csproj", "{1C1302FA-67C0-4F5E-A9AD-C14C0FEC7071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState", "RealState.WebAPI\RealState.csproj", "{1C1302FA-67C0-4F5E-A9AD-C14C0FEC7071}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealState.Core.Application", "Core\RealState.Core.Application.csproj", "{BE22197D-E980-417C-9632-D62ECE0B6A80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Core.Application", "Core\RealState.Core.Application.csproj", "{BE22197D-E980-417C-9632-D62ECE0B6A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealState.Core.Domain", "Core.Domain\RealState.Core.Domain.csproj", "{93DEF739-8632-4378-A9D9-A65A9C587FB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealState.Core.Domain", "Core.Domain\RealState.Core.Domain.csproj", "{93DEF739-8632-4378-A9D9-A65A9C587FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

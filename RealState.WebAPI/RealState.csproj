@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core.Domain\RealState.Core.Domain.csproj" />
+    <ProjectReference Include="..\Core\RealState.Core.Application.csproj" />
     <ProjectReference Include="..\RealState.Infrastructure.Identity\RealState.Infrastructure.Identity.csproj" />
     <ProjectReference Include="..\RealState.Infrastructure.Persistence\RealState.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\RealState.Infrastructure.Shared\RealState.Infrastructure.Shared.csproj" />

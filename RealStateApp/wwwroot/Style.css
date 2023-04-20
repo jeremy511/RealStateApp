@@ -1,0 +1,41 @@
+﻿
+
+.card {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 1.5rem;
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.15);
+}
+
+.card-body {
+    padding: 3rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+}
+
+.form-control {
+    border-color: #ced4da;
+}
+
+.btn {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+
+}
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+    .btn-primary:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+

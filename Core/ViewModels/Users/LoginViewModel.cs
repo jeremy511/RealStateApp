@@ -11,7 +11,7 @@ namespace RealState.Core.Application.ViewModels.Users
     {
         [Required(ErrorMessage = "*Debes colocar el nombre de usuario.*")]
         [DataType(DataType.Text)]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "*Debes colocar la contraseña.*")]
         [DataType(DataType.Password)]

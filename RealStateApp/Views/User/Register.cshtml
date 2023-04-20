@@ -1,0 +1,183 @@
+﻿@using RealState.Core.Application.ViewModels.Users
+
+@model SaveUserViewModel
+@{
+    ViewData["Title"] = "Registrarse";
+}
+
+
+<style>
+
+    /* Estilos para el contenedor principal */
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* Estilos para el formulario */
+.card {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+      border-radius: 1.5rem;
+       background-color: #FAFAF8; /* Color de fondo */
+  transition: background-color 0.5s ease; /* Transición de 0.5 segundos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  background-color: #fff; /* Color de fondo oscurecido */
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card-text {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.form-control {
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #4d80e4;
+}
+
+.form-control::placeholder {
+  color: #a8a8a8;
+}
+
+.btn {
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.btn-success {
+  background-color: #4d80e4;
+  border-color: #4d80e4;
+}
+
+.btn-success:hover {
+  background-color: #1c47a6;
+  border-color: #1c47a6;
+}
+
+.alert {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.alert p {
+  margin-bottom: 0;
+}
+
+.alert-dismissible .btn-close {
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+  text-shadow: none;
+  opacity: 1;
+}
+
+.alert-dismissible .btn-close:hover {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.75;
+}
+</style>
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-text text-center mb-0">Registrarse</h3>
+                </div>
+                <div class="card-body">
+                    @if  (ViewBag.HasError)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p>@Model.Error</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form method="post" asp-action="Register" asp-controller="User"  enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label">Nombre</label>
+                            <input class="form-control" asp-for="FirstName" required>
+                            <span asp-validation-for="FirstName" class="invalid-feedback">@Html.ValidationMessageFor(m => m.FirstName)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido</label>
+                            <input class="form-control" asp-for="LastName" required>
+                            <span asp-validation-for="LastName" class="invalid-feedback">@Html.ValidationMessageFor(m => m.LastName)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Foto de perfil</label>
+                            <input class="form-control" type="file" asp-for="File">
+                            <span asp-validation-for="File" class="invalid-feedback">@Html.ValidationMessageFor(m => m.File)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input class="form-control" asp-for="Email" required>
+                            <span asp-validation-for="Email" class="invalid-feedback">@Html.ValidationMessageFor(m => m.Email)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Teléfono</label>
+                            <input class="form-control" asp-for="Phone">
+                            <span asp-validation-for="Phone" class="invalid-feedback">@Html.ValidationMessageFor(m => m.Phone)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label">Nombre de usuario</label>
+                            <input class="form-control" asp-for="UserName" required>
+                            <span asp-validation-for="UserName" class="invalid-feedback">@Html.ValidationMessageFor(m => m.UserName)</span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input class="form-control" type="password" asp-for="Password" required>
+                            <span asp-validation-for="Password" class="invalid-feedback">@Html.ValidationMessageFor(m => m.Password)</span>
+                        </div>
+
+                                       <div class="mb-5">
+                        <label asp-for="UserType" class="form-label">Tipo de Usuario</label>
+                        <select class="form-control" name="UserType" id="mySelect" asp-for="UserType">
+                            <option value="Client">Cliente</option>
+                            <option value="Agent">Agente</option>
+                        </select>
+                    </div>
+                    <div class="d-grid gap-2 mb-5">
+                        <button class="btn btn-primary" type="submit">Registrar</button>
+</div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,140 @@
-﻿@{
+﻿@using RealState.Core.Application.ViewModels.Properties
+@model List<PropertyViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
+    List<MantPropertyViewModel> mantProperties = ViewBag.PropertyList;
+}
+<style>
+.card {
+  width: 100%;
+  height: 700px;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+.card-body {
+  font-size: 18px;
+}
+
+.card-title {
+  font-size: 24px;
+}
+
+.card-text {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: red;
+}
+
+.btn-primary {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  font-size: 24px;
+}
+</style>
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <form method="post" asp-action="Index" asp-controller="Home">
+                <div class="input-group">
+                    <input type="text" class="form-control rounded-start" name="identifier" id="identifier" placeholder="Buscar por código">
+                    <button type="submit" class="btn btn-primary rounded-end">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="card-title">Filtros</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Index" asp-controller="Home">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="Type-All" value="00" name="TypeId">
+                                <label class="form-check-label" for="Type-All">Todas</label>
+                            </div>
+                        </div>
+                        @if (mantProperties.Count != 0)
+                        {
+                            foreach (MantPropertyViewModel mant in mantProperties)
+                            {
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="type-@mant.Id" value="@mant.Id" name="TypeId">
+                                        <label class="form-check-label" for="type-@mant.Id">@mant.Name</label>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="min-price" class="form-label">Precio mínimo</label>
+                                    <input type="number" class="form-control" id="min-price" placeholder="Cantidad Minima" name="min">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="max-price" class="form-label">Precio máximo</label>
+                                    <input type="number" class="form-control" id="max-price" placeholder="Cantidad Maxima" name="max">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="bedrooms" class="form-label">Habitaciones</label>
+                                    <input type="number" class="form-control" id="bedrooms" placeholder="Habitaciones" name="bed">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="bathrooms" class="form-label">Baños</label>
+                                    <input type="number" class="form-control" id="bathrooms" placeholder="Baños" name="bath">
+                                </div>
+
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                @if(Model.Count != 0)
+                {
+                    foreach(PropertyViewModel list in Model)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <a style="text-decoration: none;" asp-controller="Home" asp-action="AdDetails" class="text-dark" asp-route-Id="@list.Id" >
+                                <div class="card shadow-sm">
+                                    <img class="card-img-top" src="@list.Photos" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@list.Type</h5>
+                                        <p class="card-text">@list.Identifier</p>
+                                        <p class="card-text">$@list.Price</p>
+                                        <div class="card-footer bg-white">
+                                            <small class="text-muted"><img src="~/Images/Icon/bed.jpg" height="16" width="16" /> @list.BedRooms  <img src="~/Images/Icon/shower.jpg"  height="16" width="16" /> @list.BathRooms  <img src="~/Images/Icon/size.png" height="16" width="16" /> @list.Size mt</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h3>No hay propiedades registradas en el sistema.</h3>
+                }
+            </div>
+        </div>
+    </div>
 </div>
+

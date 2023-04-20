@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RealState.Middlewares;
 using RealState.Core.Application;
 using RealState.Infrastructure.Identity;
 using RealState.Infrastructure.Identity.Entities;
 using RealState.Infrastructure.Identity.Seeds;
 using RealState.Infrastructure.Shared;
 using RealState.Infrastructure.Persistence;
+using WebApp.RealState.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +26,9 @@ builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.AddSharedInfrastructure(builder.Configuration);
 builder.Services.AddPersistenceInfrastucture(builder.Configuration);
 builder.Services.AddSession();
+builder.Services.AddScoped<LoginAuthorize>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-//para los middlewares builder.Services.AddTransient<ValidateUserSession, ValidateUserSession>();
-
-
+builder.Services.AddTransient<ValidateUserSession, ValidateUserSession>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -62,6 +63,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

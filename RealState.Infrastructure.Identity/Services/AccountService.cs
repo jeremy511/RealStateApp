@@ -65,7 +65,7 @@ namespace RealState.Infrastructure.Identity.Services
             if (!result.Succeeded)
             {
                 response.HasError = true;
-                response.Error = $"Datos incorrecto para cuenta {request.Email}";
+                response.Error = $"Datos incorrectos para cuenta {request.Email}";
                 return response;
             }
 

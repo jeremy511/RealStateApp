@@ -1,0 +1,31 @@
+﻿@using RealState.Core.Application.Dtos.Account
+
+@model EmailConfirm
+@{
+    ViewData["Title"] = "Confirmando Activacion";
+}
+
+<div class="row" id="contenedorClient">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header">
+                @if(Model.Token == 0) {
+                    <h3 class="text-center">Esta seguro que desea activar el usuario?</h3>
+                }
+                else {
+                    <h3 class="text-center">Esta seguro que desea desactivar el usuario?</h3>
+                }
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Admin" asp-action="Confirm">
+                    <input hidden asp-for="Token" value="@Model.Token" />
+                    <input hidden asp-for="UserId" value="@Model.UserId"  />
+                    <input hidden asp-for="De" value="@Model.De"  />
+
+                    <button type="submit" class="btn btn-success">Si</button>
+                    <a asp-controller="Admin" asp-action="UserAdministration" class="btn btn-warning">No</a>
+                </form>
+            </div>
+        </div>    
+    </div>
+</div>

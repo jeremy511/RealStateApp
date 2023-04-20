@@ -1,32 +1,107 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RealState.Models;
-using System.Diagnostics;
+﻿using RealState.Core.Application.Services;
+using Microsoft.AspNetCore.Mvc;
+using RealState.Core.Application.Interfaces.Services;
+using RealState.Core.Application.Services;
+using RealState.Core.Application.ViewModels.Properties;
 
 namespace RealState.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IAgentService _agentService;
+        private readonly IAdsService _adsService;
+        private readonly IAdsTypeService _adsTypeService;
+        public HomeController(IAgentService agentService, IAdsService adsService, IAdsTypeService adsTypeService)
         {
-            _logger = logger;
+            _agentService = agentService;
+            _adsService = adsService;
+            _adsTypeService = adsTypeService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            ViewBag.PropertyList = await _adsTypeService.GetAllViewModel();
+            return View(await _adsService.GetAllViewModel());
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<IActionResult> Index(int TypeId, int min, int max, int bed, int bath, string identifier)
         {
-            return View();
+            PropertyFilterViewModel propertyFilterViewModel = new();
+            propertyFilterViewModel.TypeId = TypeId;
+            propertyFilterViewModel.Min = min;  
+            propertyFilterViewModel.Max = max;
+            propertyFilterViewModel.BedRooms = bed;
+            propertyFilterViewModel.BathRooms = bath;
+            propertyFilterViewModel.Identifier = identifier;
+
+            if ( TypeId == 0 &&  min == 0 &&  max == 0 &&  bed == 0 &&  bath == 0 &&  identifier == null) {
+
+                return RedirectToRoute(new {Controller = "Home", Action = "Index"});
+            }
+
+
+            List<PropertyViewModel> viewModels = await _adsService.AdsWithFilter(propertyFilterViewModel);
+            return RedirectToRoute(new { Controller = "Home", Action = "IndexWithFilter", viewModels});
+
+            
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> IndexWithFilter(List<PropertyViewModel> viewModels)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.PropertyList = await _adsTypeService.GetAllViewModel();
+            return View(viewModels);
         }
+
+
+        public async Task<IActionResult> AdDetails(int Id)
+        {
+            ViewBag.Fotos = GetImagesNames(Id);
+            
+            return View(await _adsService.AdsDetail(Id));
+        }
+
+        public async Task <IActionResult> Agent()
+        {
+            ViewBag.Filter = false;
+            return View(await _agentService.ShowAgents());
+           
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Agent(string name)
+        {
+            var agents = await _agentService.AgentWithFilter(name);
+            if (agents.Count == 0)
+            {
+                ViewBag.Filter = true;
+            }
+
+            return View(await _agentService.AgentWithFilter(name));
+        }
+
+        public async Task <IActionResult> AgentAds(string Id)
+        {
+            return View( await _adsService.AgentsAds(Id));
+        }
+
+        private List<String> GetImagesNames(int id)
+        {
+
+            var dir = new System.IO.DirectoryInfo("wwwroot/Images/Products/" + id.ToString());
+
+            System.IO.FileInfo[] files = dir.GetFiles("*.*");
+
+            List<String> names = new List<String>();
+            foreach (var file in files)
+            {
+                names.Add(file.Name);
+            }
+
+            return names;
+        }
+
+
+
     }
 }
